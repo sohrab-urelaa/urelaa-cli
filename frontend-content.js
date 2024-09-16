@@ -5,43 +5,41 @@ const getUseColumnsHookContent = (
     fullUpperCaseModuleName
 ) => {
     const deleteUrl = `DELETE_${fullUpperCaseModuleName}_URL`;
-    const content = `
-            import React from "react";
-            import TableActionButtons from "../../../common/TablesActionButtons";
-            import { IMAGE_URL,${deleteUrl} } from "../../../../helpers/Constant";
-            import { useCheckScreenType } from "../../../common/useCheckScreenType";
-            import { Image } from "antd";
+    const content = `import React from "react";
+import TableActionButtons from "../../../common/TablesActionButtons";
+import { IMAGE_URL, ${deleteUrl} } from "../../../../helpers/Constant";
+import { useCheckScreenType } from "../../../common/useCheckScreenType";
+import { Image } from "antd";
 
-            const useColumns = (props) => {
-                const screenType = useCheckScreenType();
+const useColumns = (props) => {
+    const screenType = useCheckScreenType();
 
-                return [
-                    {
-                        title: "Image",
-                        dataIndex: "image",
-                        key: "image",
-                        width: 150,
-                        render: (e) => <Image width={150} src={\`\${IMAGE_URL}/\${e}\`} />
-                    },
-                    {
-                        title: "",
-                        key: "action",
-                        fixed: "right",
-                        width: screenType.isDesktop ? 90 : 65,
-                        render: (e) => (
-                            <TableActionButtons
-                                data={e}
-                                deleteUrl={${deleteUrl}}
-                                moduleName="${firstLetterSmallCaseModuleName}"
-                                callback={props.callback}
-                            />
-                        )
-                    }
-                ];
-            };
+    return [
+        {
+            title: "Image",
+            dataIndex: "image",
+            key: "image",
+            width: 150,
+            render: (e) => <Image width={150} src={\`\${IMAGE_URL}/\${e}\`} />
+        },
+        {
+            title: "",
+            key: "action",
+            fixed: "right",
+            width: screenType.isDesktop ? 90 : 65,
+            render: (e) => (
+                <TableActionButtons
+                    data={e}
+                    deleteUrl={${deleteUrl}}
+                    moduleName="${firstLetterSmallCaseModuleName}"
+                    callback={props.callback}
+                />
+            )
+        }
+    ];
+};
 
-            export default useColumns;
-    `;
+export default useColumns;`;
 
     return content;
 };
@@ -52,34 +50,32 @@ const getUseFilterHookContent = (
     camelCaseModuleName,
     fullUpperCaseModuleName
 ) => {
-    const content = `
-       const useFilterItems = () => {
-        const filterItems = [
-            {
-                label: "Caption",
-                name: "caption",
-                placeholder: "e.g. Abdur Rahim",
-                className: "col-span-6 md:col-span-4"
-            },
-            {
-                label: "Title",
-                name: "title",
-                placeholder: "e.g. Give value here",
-                className: "col-span-6 md:col-span-4"
-            },
-            {
-                label: "Description",
-                name: "description",
-                placeholder: "e.g. Give value here",
-                className: "col-span-6 md:col-span-4"
-            }
-        ];
+    const content = `const useFilterItems = () => {
+const filterItems = [
+    {
+        label: "Caption",
+        name: "caption",
+        placeholder: "e.g. Abdur Rahim",
+        className: "col-span-6 md:col-span-4"
+    },
+    {
+        label: "Title",
+        name: "title",
+        placeholder: "e.g. Give value here",
+        className: "col-span-6 md:col-span-4"
+    },
+    {
+        label: "Description",
+        name: "description",
+        placeholder: "e.g. Give value here",
+        className: "col-span-6 md:col-span-4"
+    }
+];
 
-        return filterItems;
-    };
+    return filterItems;
+};
 
-    export default useFilterItems;
-    `;
+export default useFilterItems;`;
 
     return content;
 };
@@ -90,51 +86,47 @@ const getUseFormItemsHookContent = (
     camelCaseModuleName,
     fullUpperCaseModuleName
 ) => {
-    const content = `
-        import { UPLOAD_IMAGE_URL } from "../../../../helpers/Constant";
-        const useFormItems = (fileList) => {
-            const formItems = [
-                {
-                    label: "Image",
-                    name: "image",
-                    className: "col-span-12",
-                    type: "image",
-                    limit: 1,
-                    fileList: fileList ?? [],
-                    uploadUrl: UPLOAD_IMAGE_URL
-                },
-                {
-                    label: "Title",
-                    name: "title",
-                    className: "col-span-6"
-                },
-                {
-                    label: "Caption",
-                    name: "caption",
-                    className: "col-span-6"
-                },
-                {
-                    label: "Serial",
-                    name: "serial",
-                    type: "number",
-                    className: "col-span-6"
-                },
-                {
-                    label: "Schema",
-                    name: "schema",
-                    className: "col-span-12",
-                    placeholder: "",
-                    type: "textarea"
-                }
-            ];
+    const content = `import { UPLOAD_IMAGE_URL } from "../../../../helpers/Constant";
+const useFormItems = (fileList) => {
+    const formItems = [
+        {
+            label: "Image",
+            name: "image",
+            className: "col-span-12",
+            type: "image",
+            limit: 1,
+            fileList: fileList ?? [],
+            uploadUrl: UPLOAD_IMAGE_URL
+        },
+        {
+            label: "Title",
+            name: "title",
+            className: "col-span-6"
+        },
+        {
+            label: "Caption",
+            name: "caption",
+            className: "col-span-6"
+        },
+        {
+            label: "Serial",
+            name: "serial",
+            type: "number",
+            className: "col-span-6"
+        },
+        {
+            label: "Schema",
+            name: "schema",
+            className: "col-span-12",
+            placeholder: "",
+            type: "textarea"
+        }
+    ];
 
-            return formItems;
-        };
+    return formItems;
+};
 
-        export default useFormItems;
-
-
-    `;
+export default useFormItems;`;
 
     return content;
 };
@@ -146,8 +138,7 @@ const getAddModuleContent = (
     fullUpperCaseModuleName
 ) => {
     const hocFolderName = `${camelCaseModuleName}HOC`;
-    const content = `
-import React from "react";
+    const content = `import React from "react";
 import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
 import use${camelCaseModuleName}FormItems from "./${hocFolderName}/useFormItems";
 import BaseFormComponent from "../../common/BaseFormComponent";
@@ -170,9 +161,7 @@ const Add${camelCaseModuleName} = () => {
     );
 };
 
-export default Add${camelCaseModuleName};
-
-    `;
+export default Add${camelCaseModuleName};`;
 
     return content;
 };
@@ -184,15 +173,11 @@ const getEditModuleContent = (
     fullUpperCaseModuleName
 ) => {
     const hocFolderName = `${camelCaseModuleName}HOC`;
-    const content = `
-import React from "react";
+    const content = `import React from "react";
 import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
 import use${camelCaseModuleName}FormItems from "./${hocFolderName}/useFormItems";
 import BaseFormComponent from "../../common/BaseFormComponent";
-import {
-    GET_${fullUpperCaseModuleName}_BY_ID,
-    UPDATE_${fullUpperCaseModuleName}_URL
-} from "../../../helpers/Constant";
+import {GET_${fullUpperCaseModuleName}_BY_ID, UPDATE_${fullUpperCaseModuleName}_URL} from "../../../helpers/Constant";
 
 const Edit${camelCaseModuleName} = () => {
     const pageHeader = <CustomPageHeader title="Edit ${firstLetterSmallCaseModuleName}" />;
@@ -217,9 +202,7 @@ const Edit${camelCaseModuleName} = () => {
     );
 };
 
-export default Edit${camelCaseModuleName};
-
-    `;
+export default Edit${camelCaseModuleName};`;
 
     return content;
 };
@@ -231,8 +214,7 @@ const getListViewContent = (
     fullUpperCaseModuleName
 ) => {
     const hocFolderName = `${camelCaseModuleName}HOC`;
-    const content = `
-import React from "react";
+    const content = `import React from "react";
 import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
 import { Button } from "antd";
 import use${camelCaseModuleName}Columns from "./${hocFolderName}/useColumns";
@@ -240,9 +222,7 @@ import BaseTable from "../../common/BaseTable";
 import BaseFilterComponent from "../../common/BaseFilterComponent";
 import use${camelCaseModuleName}FilterItems from "./${hocFolderName}/useFilterItems";
 import {
-    ADD_${fullUpperCaseModuleName}_PATH,
-    ${fullUpperCaseModuleName}_LIST_PATH
-} from "../../../routes/Slugs";
+    ADD_${fullUpperCaseModuleName}_PATH, ${fullUpperCaseModuleName}_LIST_PATH} from "../../../routes/Slugs";
 import { useGetAllData } from "../../common/useGetAllData";
 import { GET_ALL_${fullUpperCaseModuleName} } from "../../../helpers/Constant";
 import { Link } from "react-router-dom";
@@ -291,9 +271,7 @@ const ${camelCaseModuleName}ListView = () => {
     );
 };
 
-export default ${camelCaseModuleName}ListView;
-    
-    `;
+export default ${camelCaseModuleName}ListView;`;
 
     return content;
 };
@@ -304,16 +282,13 @@ const getConstantContent = (
     camelCaseModuleName,
     fullUpperCaseModuleName
 ) => {
-    const content = `
-        //${firstLetterSmallCaseModuleName}\n
-        export const GET_ALL_${fullUpperCaseModuleName} = \`\${API_URL}/${firstLetterSmallCaseModuleName}\`;
-        export const GET_${fullUpperCaseModuleName}_BY_ID = \`\${API_URL}/${firstLetterSmallCaseModuleName}/id\`;
-        export const CREATE_${fullUpperCaseModuleName}_URL = \`\${API_URL}/${firstLetterSmallCaseModuleName}/create\`;
-        export const UPDATE_${fullUpperCaseModuleName}_URL = \`\${API_URL}/${firstLetterSmallCaseModuleName}/update\`;
-        export const DELETE_${fullUpperCaseModuleName}_URL = \`\${API_URL}/${firstLetterSmallCaseModuleName}/delete\`;
-        \n
-        //CONSTANT_EXPORTS_AREA
-    `;
+    const content = `// ${firstLetterSmallCaseModuleName}\n
+export const GET_ALL_${fullUpperCaseModuleName} = \`\${API_URL}/${firstLetterSmallCaseModuleName}\`;
+export const GET_${fullUpperCaseModuleName}_BY_ID = \`\${API_URL}/${firstLetterSmallCaseModuleName}/id\`;
+export const CREATE_${fullUpperCaseModuleName}_URL = \`\${API_URL}/${firstLetterSmallCaseModuleName}/create\`;
+export const UPDATE_${fullUpperCaseModuleName}_URL = \`\${API_URL}/${firstLetterSmallCaseModuleName}/update\`;
+export const DELETE_${fullUpperCaseModuleName}_URL = \`\${API_URL}/${firstLetterSmallCaseModuleName}/delete\`;
+// CONSTANT_EXPORTS_AREA`;
 
     return content;
 };
@@ -325,16 +300,14 @@ const getNavsContent = (
     fullUpperCaseModuleName
 ) => {
     const content = `
-        {
+    {
             key: "${firstLetterSmallCaseModuleName}",
             label: "${firstLetterSmallCaseModuleName}",
             onClick: () => navigate(PATH.${fullUpperCaseModuleName}_LIST_PATH),
             icon: <PieChartOutlined />,
             children: null,
             permissions: [Permission.ALL]
-        },\n
-        //NAVS_EXPORTS_AREA
-    `;
+        }, // NAVS_EXPORTS_AREA`;
 
     return content;
 };
@@ -346,19 +319,16 @@ const getRouteImportsContent = (
     fullUpperCaseModuleName,
     smallLeterUnderscoreModuleName
 ) => {
-    const content = `
-        const ${camelCaseModuleName}ListView = lazy(() =>
-            import("../components/pages/${smallLeterUnderscoreModuleName}/${camelCaseModuleName}ListView")
-        );
-        const Add${camelCaseModuleName} = lazy(() =>
-            import("../components/pages/${smallLeterUnderscoreModuleName}/Add${camelCaseModuleName}")
-        );
-        const Edit${camelCaseModuleName} = lazy(() =>
-            import("../components/pages/${smallLeterUnderscoreModuleName}/Edit${camelCaseModuleName}")
-        );
-        \n
-        //ROUTE_IMPORTS_AREA
-    `;
+    const content = `const ${camelCaseModuleName}ListView = lazy(() =>
+    import("../components/pages/${smallLeterUnderscoreModuleName}/${camelCaseModuleName}ListView")
+);
+const Add${camelCaseModuleName} = lazy(() =>
+    import("../components/pages/${smallLeterUnderscoreModuleName}/Add${camelCaseModuleName}")
+);
+const Edit${camelCaseModuleName} = lazy(() =>
+    import("../components/pages/${smallLeterUnderscoreModuleName}/Edit${camelCaseModuleName}")
+);
+// ROUTE_IMPORTS_AREA`;
 
     return content;
 };
@@ -371,30 +341,29 @@ const getRouteDeclarationContent = (
     smallLeterUnderscoreModuleName
 ) => {
     const content = `
-        {
-            path: PATH.${fullUpperCaseModuleName}_LIST_PATH,
-            exact: true,
-            isPrivate: false,
-            component: ${camelCaseModuleName}ListView,
-            permissions: [Permission.ALL],
-        },
-        {
-            path: PATH.ADD_${fullUpperCaseModuleName}_PATH,
-            exact: true,
-            isPrivate: false,
-            component: Add${camelCaseModuleName},
-            permissions: [Permission.ALL],
-        },
-        {
-            path: \`\${PATH.EDIT_${fullUpperCaseModuleName}_PATH}/:id\`,
-            exact: true,
-            isPrivate: false,
-            component: Edit${camelCaseModuleName},
-            permissions: [Permission.ALL],
-        },
-        \n
-        //ROUTE_DECLARATION_AREA
-    `;
+    ,{
+        path: PATH.${fullUpperCaseModuleName}_LIST_PATH,
+        exact: true,
+        isPrivate: false,
+        component: ${camelCaseModuleName}ListView,
+        permissions: [Permission.ALL],
+    },
+    {
+        path: PATH.ADD_${fullUpperCaseModuleName}_PATH,
+        exact: true,
+        isPrivate: false,
+        component: Add${camelCaseModuleName},
+        permissions: [Permission.ALL],
+    },
+    {
+        path: \`\${PATH.EDIT_${fullUpperCaseModuleName}_PATH}/:id\`,
+        exact: true,
+        isPrivate: false,
+        component: Edit${camelCaseModuleName},
+        permissions: [Permission.ALL],
+    },
+    \n
+    // ROUTE_DECLARATION_AREA`;
 
     return content;
 };
@@ -406,13 +375,11 @@ const getSlugContent = (
     fullUpperCaseModuleName,
     smallLeterUnderscoreModuleName
 ) => {
-    const content = `
-       //${firstLetterSmallCaseModuleName}\n
-        export const ${fullUpperCaseModuleName}_LIST_PATH = \`\${ROOT_PATH}${firstLetterSmallCaseModuleName}-list\`;
-        export const ADD_${fullUpperCaseModuleName}_PATH = \`\${ROOT_PATH}add-${firstLetterSmallCaseModuleName}\`;
-        export const EDIT_${fullUpperCaseModuleName}_PATH = \`\${ROOT_PATH}edit-${firstLetterSmallCaseModuleName}\`;
-        //SLUGS_EXPORTS_AREA
-    `;
+    const content = `// ${firstLetterSmallCaseModuleName}\n
+export const ${fullUpperCaseModuleName}_LIST_PATH = \`\${ROOT_PATH}${firstLetterSmallCaseModuleName}-list\`;
+export const ADD_${fullUpperCaseModuleName}_PATH = \`\${ROOT_PATH}add-${firstLetterSmallCaseModuleName}\`;
+export const EDIT_${fullUpperCaseModuleName}_PATH = \`\${ROOT_PATH}edit-${firstLetterSmallCaseModuleName}\`;
+// SLUGS_EXPORTS_AREA`;
 
     return content;
 };

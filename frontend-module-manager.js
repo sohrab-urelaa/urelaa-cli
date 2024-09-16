@@ -204,7 +204,7 @@ class FrontendModuleManager {
         if (fs.existsSync(routeDeclarationPath)) {
             const content = fs.readFileSync(routeDeclarationPath, "utf8");
             const newContent = content.replace(
-                "//ROUTE_DECLARATION_AREA",
+                "// ROUTE_DECLARATION_AREA",
                 getRouteDeclarationContent(
                     this.moduleName,
                     this.firstLetterSmallCaseModuleName,
@@ -256,7 +256,7 @@ class FrontendModuleManager {
         ).start();
         if (fs.existsSync(routeImportsPath)) {
             const content = fs.readFileSync(routeImportsPath, "utf8");
-            const exportArea = "//ROUTE_IMPORTS_AREA";
+            const exportArea = "// ROUTE_IMPORTS_AREA";
             const newExports = getRouteImportsContent(
                 this.moduleName,
                 this.firstLetterSmallCaseModuleName,
@@ -308,7 +308,7 @@ class FrontendModuleManager {
         const spinner = ora(`Modifying Slug File ${this.moduleName}`).start();
         if (fs.existsSync(slugPath)) {
             const content = fs.readFileSync(slugPath, "utf8");
-            const exportArea = "//SLUGS_EXPORTS_AREA";
+            const exportArea = "// SLUGS_EXPORTS_AREA";
             const newExports = getSlugContent(
                 this.moduleName,
                 this.firstLetterSmallCaseModuleName,
@@ -359,7 +359,7 @@ class FrontendModuleManager {
         const spinner = ora(`Modifying Navs File ${this.moduleName}`).start();
         if (fs.existsSync(navsPath)) {
             const content = fs.readFileSync(navsPath, "utf8");
-            const exportArea = "//NAVS_EXPORTS_AREA";
+            const exportArea = "// NAVS_EXPORTS_AREA";
             const newExports = getNavsContent(
                 this.moduleName,
                 this.firstLetterSmallCaseModuleName,
@@ -406,7 +406,7 @@ class FrontendModuleManager {
         ).start();
         if (fs.existsSync(constantPath)) {
             const content = fs.readFileSync(constantPath, "utf8");
-            const exportArea = "//CONSTANT_EXPORTS_AREA";
+            const exportArea = "// CONSTANT_EXPORTS_AREA";
             const newExports = getConstantContent(
                 this.moduleName,
                 this.firstLetterSmallCaseModuleName,
@@ -443,7 +443,7 @@ class FrontendModuleManager {
             // Remove any empty lines that might have been left
             let cleanedContent = updatedContent.replace(/^\s*[\r\n]/gm, "");
             cleanedContent = cleanedContent.replace(
-                `//${this.firstLetterSmallCaseModuleName}`,
+                `// ${this.firstLetterSmallCaseModuleName}`,
                 ""
             );
             fs.writeFileSync(constantPath, cleanedContent);
