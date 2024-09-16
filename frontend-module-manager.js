@@ -95,8 +95,8 @@ class FrontendModuleManager {
             spinner.fail("Use Columns Hook Already Exists");
         }
 
-        //create useFilter.js
-        const useFilterPath = `${this.hocFolderPath}/useFilter.js`;
+        //create useFilterItems.js
+        const useFilterPath = `${this.hocFolderPath}/useFilterItems.js`;
         const filterSpinner = ora(
             `Creating Use Filter Hook ${this.moduleName}`
         ).start();

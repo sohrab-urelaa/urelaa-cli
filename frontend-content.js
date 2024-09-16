@@ -328,7 +328,7 @@ const getNavsContent = (
         {
             key: "${firstLetterSmallCaseModuleName}",
             label: "${firstLetterSmallCaseModuleName}",
-            onClick: () => navigate(PATH.${fullUpperCaseModuleName}_PATH),
+            onClick: () => navigate(PATH.${fullUpperCaseModuleName}_LIST_PATH),
             icon: <PieChartOutlined />,
             children: null,
             permissions: [Permission.ALL]
