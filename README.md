@@ -5,8 +5,7 @@ A npm package to generate Urelaa API documentation
 ## Installation
 
 ```
-$ npm install urelaa-cli
-$ yarn add urelaa-cli
+$ npm install -g urelaa-cli
 ```
 
 ## Features
@@ -26,6 +25,30 @@ $ yarn add urelaa-cli
 ```
      urelaa create fm // to create frontend module
      urelaa create bm // to create backend module
+
+     urelaa upload bm/fm// to upload module files
+
+    //for this  commands need to create any.json file into root directory and add the following
+
+        [
+                {
+                    "moduleName": "User",
+                    "modelProperties": "name@S@R,email@S@R,password@S@R,createdAt@D@R,updatedAt@D@R",
+                    "moduleType": "bm"
+                }
+        ]
+
+
+     urelaa remove-modules bm/fm// to remove module files
+
+     //for this  commands need to create any.json file into root directory and add the following
+        [
+                {
+                    "moduleName": "User",
+                    "modelProperties": "name@S@R,email@S@R,password@S@R,createdAt@D@R,updatedAt@D@R",
+                    "moduleType": "bm"
+                }
+        ]
 
      ####
 
