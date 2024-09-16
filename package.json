@@ -1,6 +1,6 @@
 {
     "name": "urelaa-cli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "This is a CLI for Urelaa",
     "main": "index.js",
     "scripts": {
@@ -16,5 +16,9 @@
         "inquirer": "^8.2.5",
         "ora": "^5.4.1",
         "yargs": "^17.7.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sohrab-urelaa/urelaa-cli.git"
     }
 }
