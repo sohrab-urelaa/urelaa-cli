@@ -34,6 +34,34 @@ const start = () => {
                 commandResultHandler.handleDeleteModuleCommand(argv);
             }
         )
+        .command(
+            "upload <type>",
+            "Upload module file",
+            (yargs) => {
+                yargs.positional("type", {
+                    describe:
+                        "Type of module (bm for Backend, fm for Frontend)",
+                    choices: ["bm", "fm"],
+                });
+            },
+            (argv) => {
+                commandResultHandler.handleUploadModuleCommand(argv);
+            }
+        )
+        .command(
+            "remove-modules <type>",
+            "Remove modules from file",
+            (yargs) => {
+                yargs.positional("type", {
+                    describe:
+                        "Type of module (bm for Backend, fm for Frontend)",
+                    choices: ["bm", "fm"],
+                });
+            },
+            (argv) => {
+                commandResultHandler.handleDeleteModuleFromFilesCommand(argv);
+            }
+        )
         .help().argv;
 };
 

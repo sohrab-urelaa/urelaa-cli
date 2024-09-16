@@ -1,5 +1,6 @@
 const ora = require("ora");
 const fs = require("fs");
+const ModelGenerator = require("./model-generator");
 
 function getRouteContent(
     moduleName,
@@ -43,8 +44,9 @@ module.exports = async (app) => {
 }
 
 class BackendModuleManager {
-    constructor(moduleName) {
+    constructor(moduleName, modelProperties) {
         this.moduleName = moduleName;
+        this.modelProperties = modelProperties;
     }
     create() {
         this.modifyModuleName();
@@ -198,21 +200,14 @@ class BackendModuleManager {
             `Creating ${this.camelCaseModuleName} Model`
         ).start();
         const modelPath = `./src/models/${this.camelCaseModuleName}.js`;
-        const modelContent = `const mongoose = require("mongoose")
-const Schema = mongoose.Schema
-const ${this.camelCaseModuleName}Schema = new Schema(
-    {
-        createdBy:{
-            type:  mongoose.Schema.Types.ObjectId,
-            ref:'User'
-        },
-    },
-    {
-        timestamps: true
-    }
-)
-module.exports = mongoose.model("${this.camelCaseModuleName}", ${this.camelCaseModuleName}Schema)
-    `;
+
+        const modelGenerator = new ModelGenerator(
+            this.moduleName,
+            this.modelProperties,
+            this
+        );
+
+        const modelContent = modelGenerator.getGeneratedModelContent();
         fs.writeFileSync(modelPath, modelContent);
         spinner.succeed(`${this.camelCaseModuleName} Model Created`);
     };
