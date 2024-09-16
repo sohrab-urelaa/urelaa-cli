@@ -23,6 +23,18 @@ $ yarn add urelaa-cli
 
 ## Demo
 
+```
+     urelaa create fm // to create frontend module
+     urelaa create bm // to create backend module
+
+     ####
+
+     urelaa --help  // to see the help menu
+     urelaa --version  // to see the version
+
+
+```
+
 # Setup Guide For Backend
 
 ### Setup App Export Area
