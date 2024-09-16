@@ -147,30 +147,30 @@ const getAddModuleContent = (
 ) => {
     const hocFolderName = `${camelCaseModuleName}HOC`;
     const content = `
-        import React from "react";
-        import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
-        import use${camelCaseModuleName}FormItems from "./${hocFolderName}/useFormItems";
-        import BaseFormComponent from "../../common/BaseFormComponent";
-        import { CREATE_${fullUpperCaseModuleName}_URL } from "../../../helpers/Constant";
+import React from "react";
+import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
+import use${camelCaseModuleName}FormItems from "./${hocFolderName}/useFormItems";
+import BaseFormComponent from "../../common/BaseFormComponent";
+import { CREATE_${fullUpperCaseModuleName}_URL } from "../../../helpers/Constant";
 
-        const Add${camelCaseModuleName} = () => {
-            const pageHeader = <CustomPageHeader title="Add new ${firstLetterSmallCaseModuleName}" />;
+const Add${camelCaseModuleName} = () => {
+    const pageHeader = <CustomPageHeader title="Add new ${firstLetterSmallCaseModuleName}" />;
 
-            const formItems = use${camelCaseModuleName}FormItems();
+    const formItems = use${camelCaseModuleName}FormItems();
 
-            return (
-                <PageWrapper pageHeader={pageHeader}>
-                    <div>
-                        <BaseFormComponent
-                            formItems={formItems}
-                            submitUrl={CREATE_${fullUpperCaseModuleName}_URL}
-                        />
-                    </div>
-                </PageWrapper>
-            );
-        };
+    return (
+        <PageWrapper pageHeader={pageHeader}>
+            <div>
+                <BaseFormComponent
+                    formItems={formItems}
+                    submitUrl={CREATE_${fullUpperCaseModuleName}_URL}
+                />
+            </div>
+        </PageWrapper>
+    );
+};
 
-        export default Add${camelCaseModuleName};
+export default Add${camelCaseModuleName};
 
     `;
 
@@ -185,39 +185,39 @@ const getEditModuleContent = (
 ) => {
     const hocFolderName = `${camelCaseModuleName}HOC`;
     const content = `
-        import React from "react";
-        import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
-        import use${camelCaseModuleName}FormItems from "./${hocFolderName}/useFormItems";
-        import BaseFormComponent from "../../common/BaseFormComponent";
-        import {
-            GET_${fullUpperCaseModuleName}_BY_ID,
-            UPDATE_${fullUpperCaseModuleName}_URL
-        } from "../../../helpers/Constant";
+import React from "react";
+import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
+import use${camelCaseModuleName}FormItems from "./${hocFolderName}/useFormItems";
+import BaseFormComponent from "../../common/BaseFormComponent";
+import {
+    GET_${fullUpperCaseModuleName}_BY_ID,
+    UPDATE_${fullUpperCaseModuleName}_URL
+} from "../../../helpers/Constant";
 
-        const Edit${camelCaseModuleName} = () => {
-            const pageHeader = <CustomPageHeader title="Edit ${firstLetterSmallCaseModuleName}" />;
-            const formItems = use${camelCaseModuleName}FormItems();
+const Edit${camelCaseModuleName} = () => {
+    const pageHeader = <CustomPageHeader title="Edit ${firstLetterSmallCaseModuleName}" />;
+    const formItems = use${camelCaseModuleName}FormItems();
 
-            const modifyInitialData = (data) => {
-                data.role = data.role?.alias;
-                return data;
-            };
+    const modifyInitialData = (data) => {
+        data.role = data.role?.alias;
+        return data;
+    };
 
-            return (
-                <PageWrapper pageHeader={pageHeader}>
-                    <div>
-                        <BaseFormComponent
-                            formItems={formItems}
-                            initialDataUrl={GET_${fullUpperCaseModuleName}_BY_ID}
-                            modifyInitialData={modifyInitialData}
-                            submitUrl={UPDATE_${fullUpperCaseModuleName}_URL}
-                        />
-                    </div>
-                </PageWrapper>
-            );
-        };
+    return (
+        <PageWrapper pageHeader={pageHeader}>
+            <div>
+                <BaseFormComponent
+                    formItems={formItems}
+                    initialDataUrl={GET_${fullUpperCaseModuleName}_BY_ID}
+                    modifyInitialData={modifyInitialData}
+                    submitUrl={UPDATE_${fullUpperCaseModuleName}_URL}
+                />
+            </div>
+        </PageWrapper>
+    );
+};
 
-        export default Edit${camelCaseModuleName};
+export default Edit${camelCaseModuleName};
 
     `;
 
@@ -232,66 +232,66 @@ const getListViewContent = (
 ) => {
     const hocFolderName = `${camelCaseModuleName}HOC`;
     const content = `
-        import React from "react";
-        import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
-        import { Button } from "antd";
-        import use${camelCaseModuleName}Columns from "./${hocFolderName}/useColumns";
-        import BaseTable from "../../common/BaseTable";
-        import BaseFilterComponent from "../../common/BaseFilterComponent";
-        import use${camelCaseModuleName}FilterItems from "./${hocFolderName}/useFilterItems";
-        import {
-            ADD_${fullUpperCaseModuleName}_PATH,
-            ${camelCaseModuleName}_LIST_PATH
-        } from "../../../routes/Slugs";
-        import { useGetAllData } from "../../common/useGetAllData";
-        import { GET_ALL_${fullUpperCaseModuleName} } from "../../../helpers/Constant";
-        import { Link } from "react-router-dom";
-        import { scrollConfig } from "../../../helpers/Utils";
+import React from "react";
+import PageWrapper, { CustomPageHeader } from "../../common/PageWrapper";
+import { Button } from "antd";
+import use${camelCaseModuleName}Columns from "./${hocFolderName}/useColumns";
+import BaseTable from "../../common/BaseTable";
+import BaseFilterComponent from "../../common/BaseFilterComponent";
+import use${camelCaseModuleName}FilterItems from "./${hocFolderName}/useFilterItems";
+import {
+    ADD_${fullUpperCaseModuleName}_PATH,
+    ${fullUpperCaseModuleName}_LIST_PATH
+} from "../../../routes/Slugs";
+import { useGetAllData } from "../../common/useGetAllData";
+import { GET_ALL_${fullUpperCaseModuleName} } from "../../../helpers/Constant";
+import { Link } from "react-router-dom";
+import { scrollConfig } from "../../../helpers/Utils";
 
-        const ${camelCaseModuleName}ListView = () => {
-            const { dataList, loadingList, totalElements, getAllData } =
-                    useGetAllData(GET_ALL_${fullUpperCaseModuleName});
+const ${camelCaseModuleName}ListView = () => {
+    const { dataList, loadingList, totalElements, getAllData } =
+            useGetAllData(GET_ALL_${fullUpperCaseModuleName});
 
-            const columns = use${camelCaseModuleName}Columns({ callback: getAllData });
+    const columns = use${camelCaseModuleName}Columns({ callback: getAllData });
 
-            const pageHeader = (
-                <CustomPageHeader
-                    title="${firstLetterSmallCaseModuleName} list"
-                    extra={[
-                        <Link key="add-${firstLetterSmallCaseModuleName}" to={ADD_${fullUpperCaseModuleName}_PATH}>
-                            <Button key="add-button" type="primary">
-                                Add ${firstLetterSmallCaseModuleName}
-                            </Button>
-                        </Link>
-                    ]}
+    const pageHeader = (
+        <CustomPageHeader
+            title="${firstLetterSmallCaseModuleName} list"
+            extra={[
+                <Link key="add-${firstLetterSmallCaseModuleName}" to={ADD_${fullUpperCaseModuleName}_PATH}>
+                    <Button key="add-button" type="primary">
+                        Add ${firstLetterSmallCaseModuleName}
+                    </Button>
+                </Link>
+            ]}
+        />
+    );
+
+    return (
+        <PageWrapper pageHeader={pageHeader}>
+            <div>
+                <BaseFilterComponent
+                    title="Search ${firstLetterSmallCaseModuleName}"
+                    itemCount={totalElements}
+                    searchAction={getAllData}
+                    filterItems={use${camelCaseModuleName}FilterItems()}
+                    currentPath={${fullUpperCaseModuleName}_LIST_PATH}
                 />
-            );
 
-            return (
-                <PageWrapper pageHeader={pageHeader}>
-                    <div>
-                        <BaseFilterComponent
-                            title="Search ${firstLetterSmallCaseModuleName}"
-                            itemCount={totalElements}
-                            searchAction={getAllData}
-                            filterItems={use${camelCaseModuleName}FilterItems()}
-                            currentPath={${fullUpperCaseModuleName}_LIST_PATH}
-                        />
+                <BaseTable
+                    columns={columns}
+                    dataSource={dataList}
+                    loading={loadingList}
+                    totalElements={totalElements}
+                    currentPath={${fullUpperCaseModuleName}_LIST_PATH}
+                    scroll={scrollConfig}
+                />
+            </div>
+        </PageWrapper>
+    );
+};
 
-                        <BaseTable
-                            columns={columns}
-                            dataSource={dataList}
-                            loading={loadingList}
-                            totalElements={totalElements}
-                            currentPath={${fullUpperCaseModuleName}_LIST_PATH}
-                            scroll={scrollConfig}
-                        />
-                    </div>
-                </PageWrapper>
-            );
-        };
-
-        export default ${camelCaseModuleName}ListView;
+export default ${camelCaseModuleName}ListView;
     
     `;
 
