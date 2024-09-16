@@ -15,7 +15,18 @@ const SidebarMenus = () => {
             icon: <PieChartOutlined />,
             children: null,
             permissions: [Permission.ALL],
-        },//NAVS_EXPORTS_AREA
+        },
+        {
+            key: "user",
+            label: "user",
+            onClick: () => navigate(PATH.USER_PATH),
+            icon: <PieChartOutlined />,
+            children: null,
+            permissions: [Permission.ALL]
+        },
+
+        //NAVS_EXPORTS_AREA
+    
     ];
 };
 export default SidebarMenus;
