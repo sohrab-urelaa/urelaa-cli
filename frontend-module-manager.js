@@ -203,15 +203,29 @@ class FrontendModuleManager {
         ).start();
         if (fs.existsSync(routeDeclarationPath)) {
             const content = fs.readFileSync(routeDeclarationPath, "utf8");
+            // Check if there's a comma before the replace content
+            const commaCheck = content.match(
+                /,\s*\/\/\s*ROUTE_DECLARATION_AREA/
+            );
+
+            // Prepare the new content
+            let routeDeclarationContent = getRouteDeclarationContent(
+                this.moduleName,
+                this.firstLetterSmallCaseModuleName,
+                this.camelCaseModuleName,
+                this.fullUpperCaseModuleName,
+                this.smallLeterUnderscoreModuleName
+            );
+
+            // If there's no comma before the replace content, add one at the start of the new content
+            if (!commaCheck) {
+                routeDeclarationContent = "," + routeDeclarationContent;
+            }
+
+            // Replace the content
             const newContent = content.replace(
-                "// ROUTE_DECLARATION_AREA",
-                getRouteDeclarationContent(
-                    this.moduleName,
-                    this.firstLetterSmallCaseModuleName,
-                    this.camelCaseModuleName,
-                    this.fullUpperCaseModuleName,
-                    this.smallLeterUnderscoreModuleName
-                )
+                /(\s*)(\/\/\s*ROUTE_DECLARATION_AREA)/,
+                routeDeclarationContent
             );
             fs.writeFileSync(routeDeclarationPath, newContent);
             spinner.succeed("Route Declaration Area Modified");
@@ -332,13 +346,15 @@ class FrontendModuleManager {
         if (fs.existsSync(slugPath)) {
             const content = fs.readFileSync(slugPath, "utf8");
             // Define the pattern to match the exports for this module in the Slugs file
+            // Define the pattern to match the exports for this module in the Slugs file
             const slugExportPattern = new RegExp(
-                `\\s*\\/\\/${this.firstLetterSmallCaseModuleName}\\s*\\n` +
-                    `\\s*export const ${this.fullUpperCaseModuleName}_LIST_PATH = \`\\\${ROOT_PATH}${this.firstLetterSmallCaseModuleName}-list\`;\\s*\\n` +
-                    `\\s*export const ADD_${this.fullUpperCaseModuleName}_PATH = \`\\\${ROOT_PATH}add-${this.firstLetterSmallCaseModuleName}\`;\\s*\\n` +
-                    `\\s*export const EDIT_${this.fullUpperCaseModuleName}_PATH = \`\\\${ROOT_PATH}edit-${this.firstLetterSmallCaseModuleName}\`;\\s*\\n?`,
+                `// ${this.firstLetterSmallCaseModuleName}\\s*` +
+                    `export const ${this.fullUpperCaseModuleName}_LIST_PATH = \`\\\${ROOT_PATH}${this.firstLetterSmallCaseModuleName}-list\`;\\s*` +
+                    `export const ADD_${this.fullUpperCaseModuleName}_PATH = \`\\\${ROOT_PATH}add-${this.firstLetterSmallCaseModuleName}\`;\\s*` +
+                    `export const EDIT_${this.fullUpperCaseModuleName}_PATH = \`\\\${ROOT_PATH}edit-${this.firstLetterSmallCaseModuleName}\`;\\s*`,
                 "g"
             );
+
             // Remove the matching exports
             const updatedContent = content.replace(slugExportPattern, "");
 
@@ -348,7 +364,7 @@ class FrontendModuleManager {
             // Write the cleaned content back to the file
             fs.writeFileSync(slugPath, cleanedContent);
             spinner.succeed(
-                `Slug exports for ${this.moduleName} removed from Slugs.js`
+                `Slugs for ${this.moduleName} removed from Slugs.js`
             );
         } else {
             spinner.fail("Slug File Not Found");

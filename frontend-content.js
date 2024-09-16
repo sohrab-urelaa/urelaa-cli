@@ -341,7 +341,7 @@ const getRouteDeclarationContent = (
     smallLeterUnderscoreModuleName
 ) => {
     const content = `
-    ,{
+    {
         path: PATH.${fullUpperCaseModuleName}_LIST_PATH,
         exact: true,
         isPrivate: false,

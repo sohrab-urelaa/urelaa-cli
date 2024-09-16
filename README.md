@@ -48,7 +48,6 @@ $ yarn add urelaa-cli
 
     //and on the export section add the following comment
 
-    app.use("/files", express.static(path.join(__dirname, "../")));
     //INCLUDE ROUTES AREA
 
 ```
@@ -61,12 +60,12 @@ $ yarn add urelaa-cli
     //open './src/helpers/Constants.js' file and add the following end of the file or any
     //area you want
 
-    //CONSTANT_EXPORTS_AREA
+    // CONSTANT_EXPORTS_AREA
 
 
     //open './src/helpers/nav.js' file and add the following comment end of the return area
 
-    //NAVS_EXPORTS_AREA
+    // NAVS_EXPORTS_AREA
 
 ```
 
@@ -75,30 +74,29 @@ $ yarn add urelaa-cli
 ```
    // open './src/routes/AppRoutes.js' file and add the following comment into require area
 
-     //ROUTE_IMPORTS_AREA
+     // ROUTE_IMPORTS_AREA
 
     // and add the following comment into end of the exports array area
 
-    //ROUTE_DECLARATION_AREA
+    // ROUTE_DECLARATION_AREA
 
 
     //open './src/routes/Slugs.js' file and add the following comment into end of the file
 
-    //SLUGS_EXPORTS_AREA
+    // SLUGS_EXPORTS_AREA
 
 
 
 
+### .eslintrc.json
+```
 
+    //modify rules and add the following rule
+
+     "prettier/prettier": 0,
+     "no-sparse-arrays": 0,
+     "indent": 0
 
 ```
 
-### Cache Api
-
-```
-   import { BCache } from "cache-wise";
-   const cachApi = new BCache();
-        const data = await cachApi.get(url, {
-            invalidAfter: INVALID_AFTER,
-    });
 ```

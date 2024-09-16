@@ -9,39 +9,35 @@ function getRouteContent(
 ) {
     const modelName = `${camelCaseModuleName}Model`;
     const serviceName = `${firstLetterSmallCaseModuleName}Service`;
-    const content = `
-       const { ${modelName} } = require("../models");
-        const autoCrud = require("./auto-crud/auto-crud");
-        const errorHandler = require("../utils/errors/app-errors");
-        const { auth, checkPermission } = require("../middlewares");
-        const { BaseRepository } = require("../repository");
-        const { getQueryParams } = require("../repository/common");
-        const { BaseService } = require("../services");
+    const content = `const { ${modelName} } = require("../models");
+const autoCrud = require("./auto-crud/auto-crud");
+const errorHandler = require("../utils/errors/app-errors");
+const { auth, checkPermission } = require("../middlewares");
+const { BaseRepository } = require("../repository");
+const { getQueryParams } = require("../repository/common");
+const { BaseService } = require("../services");
 
-        module.exports = async (app) => {
-            const ${serviceName} = new BaseService({
-                Model: ${modelName},
-                repository: new BaseRepository(${modelName}),
-                errorHandler,
-                modelName: "${firstLetterSmallCaseModuleName}",
-                sortWhenGetAll: { serial: 1 },
-                actions: {
-                   
-                },
-            });
+module.exports = async (app) => {
+    const ${serviceName} = new BaseService({
+        Model: ${modelName},
+        repository: new BaseRepository(${modelName}),
+        errorHandler,
+        modelName: "${firstLetterSmallCaseModuleName}",
+        sortWhenGetAll: { serial: 1 },
+        actions: {
+            
+        },
+    });
 
-            autoCrud(app, {
-                path: "${firstLetterSmallCaseModuleName}",
-                mode: "CRpSpUD",
-                service: ${serviceName},
-                auth,
-                checkPermission,
-                permissionString: "",
-            });
-        };
-
-   
-   `;
+    autoCrud(app, {
+        path: "${firstLetterSmallCaseModuleName}",
+        mode: "CRpSpUD",
+        service: ${serviceName},
+        auth,
+        checkPermission,
+        permissionString: "",
+    });
+};`;
 
     return content;
 }
@@ -156,7 +152,7 @@ class BackendModuleManager {
             );
 
             // Include the new route
-            const routeStatement = `    ${this.firstLetterSmallCaseModuleName}(app),\n`;
+            const routeStatement = `    ${this.firstLetterSmallCaseModuleName}(app);\n`;
             const updatedRouteArea = updatedImportArea.replace(
                 /\/\/INCLUDE ROUTES AREA/,
                 `${routeStatement}\n//INCLUDE ROUTES AREA\n`
@@ -184,7 +180,7 @@ class BackendModuleManager {
                 importStatement,
                 ""
             );
-            const routeStatement = `    ${this.firstLetterSmallCaseModuleName}(app),\n`;
+            const routeStatement = `    ${this.firstLetterSmallCaseModuleName}(app);\n`;
             const updatedRouteArea = updatedImportArea.replace(
                 `${routeStatement}`,
                 ""
@@ -202,21 +198,20 @@ class BackendModuleManager {
             `Creating ${this.camelCaseModuleName} Model`
         ).start();
         const modelPath = `./src/models/${this.camelCaseModuleName}.js`;
-        const modelContent = `
-        const mongoose = require("mongoose")
-        const Schema = mongoose.Schema
-        const ${this.camelCaseModuleName}Schema = new Schema(
-            {
-                createdBy:{
-                    type:  mongoose.Schema.Types.ObjectId,
-                    ref:'User'
-                },
-            },
-            {
-                timestamps: true
-            }
-        )
-        module.exports = mongoose.model("${this.camelCaseModuleName}", ${this.camelCaseModuleName}Schema)
+        const modelContent = `const mongoose = require("mongoose")
+const Schema = mongoose.Schema
+const ${this.camelCaseModuleName}Schema = new Schema(
+    {
+        createdBy:{
+            type:  mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        },
+    },
+    {
+        timestamps: true
+    }
+)
+module.exports = mongoose.model("${this.camelCaseModuleName}", ${this.camelCaseModuleName}Schema)
     `;
         fs.writeFileSync(modelPath, modelContent);
         spinner.succeed(`${this.camelCaseModuleName} Model Created`);
